@@ -7,13 +7,19 @@ class ApplicationController < ActionController::API
   private
   def authenticate_request
     header = request.headers["Authorization"]
-    token = header.split(" ").last if header
+    token = (header.split(" ").last if header) || nil
+    if token.nil?
+        render json: {}, status: 401
+    end
+    
     claim_data = nil
     begin
       claim_data = jwt_decode(token)
-    rescue => error
-      logger.debug "Error: #{error}"
+    rescue JWT::DecodeError
       render json: {}, status: 401
+    rescue  => error
+      logger.debug "Error: #{error}"
+      render json: {}, status: 500
     end
     @current_user = User.find(claim_data['id'])
     if @current_user.nil?
