@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ApplicationController
-  skip_before_action :authenticate_request, only: [:index, :show]
+  skip_before_action :authenticate_request, only: [:show]
 
   def create
     @article = Article.new(create_article_params.merge(user_id: @current_user.id))
@@ -15,6 +15,6 @@ class Api::V1::ArticlesController < ApplicationController
   private
 
   def create_article_params
-    params.permit(:title, :body)
+    params.require(:article).permit(:title, :body)
   end
 end

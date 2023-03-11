@@ -10,13 +10,15 @@ module JsonWebToken
   DECODE_OPTIONS = { algorithm: ALGORITHM }
 
   def jwt_encode
+    expires_in = Time.now.to_i + 3600 * 24
     jwt_payload = {
       data: {id: @user.id, username: @user.username, email: @user.email},
       iat: Time.now.to_i,
       iss: ISS,
-      exp: Time.now.to_i + 3600
+      exp: expires_in
     }
     token = JWT.encode jwt_payload, JWT_SECRET ,ALGORITHM
+    [token, expires_in]
   end
 
   def jwt_decode(token)
