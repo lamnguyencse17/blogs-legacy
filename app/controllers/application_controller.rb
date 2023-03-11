@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
     header = request.headers["Authorization"]
     token = (header.split(" ").last if header) || nil
     if token.nil?
-        render json: {}, status: 401
+        render json: {}, status: 401 and return
     end
 
     claim_data = nil
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
     end
     @current_user = User.find(claim_data['id'])
     if @current_user.nil?
-      render json: {}, status: 401 and nil
+      render json: {}, status: 401 and return
     end
   end
 end
