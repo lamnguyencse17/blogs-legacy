@@ -11,11 +11,8 @@ class Api::V1::UsersController < ApplicationController
     render json: {user: @user, token: jwt_encode}
   end
 
-  def authenticate
-    render json: @current_user
-  end
-
   private
+
 
   def create_user_params
     params.require(:user).permit(:username, :email, :password)

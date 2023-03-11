@@ -3,9 +3,11 @@ require 'bcrypt'
 class User < ApplicationRecord
   include BCrypt
 
+  has_many :articles, dependent: :destroy
+
   validates :username, presence: true, length: {minimum: 6}
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  # validates :password, presence: true, length: {minimum: 6}, on: :create
+
 
   def password
     @password ||= Password.new(password_hash)

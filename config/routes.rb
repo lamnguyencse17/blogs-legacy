@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       resources :articles
-      resources :users do
+      resources :users
+      resources :authenticate do
         collection do
-          get 'authenticate'
+          post 'login'
+          post 'logout'
         end
       end
     end
