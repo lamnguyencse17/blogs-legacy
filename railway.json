@@ -1,0 +1,12 @@
+{
+    "$schema": "https://railway.app/railway.schema.json",
+    "build": {
+      "builder": "NIXPACKS",
+      "buildCommand": "RAILS_ENV=production rails db:migrate;bundle exec rake assets:precompile; bundle exec rake assets:clean;"
+    },
+    "deploy": {
+      "healthcheckPath": "/api/v1/health",
+      "restartPolicyType": "ON_FAILURE",
+      "restartPolicyMaxRetries": 10
+    }
+  }
