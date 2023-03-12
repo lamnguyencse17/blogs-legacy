@@ -14,16 +14,16 @@ class Api::V1::AuthenticateController < ApplicationController
       generated_token, expires_in = jwt_encode
       session = Session.new(user_id: @user.id, token: generated_token, expires_in: Time.at(expires_in))
       session.save!
-      render json: {user: @user, token: generated_token}
+      render json: { user: @user, token: generated_token }
     else
       render json: {}, status: 401
     end
   end
 
-  def logout
-  end
+  def logout; end
 
   private
+
   def login_user_params
     params.require(:authenticate).permit(:email, :password)
   end

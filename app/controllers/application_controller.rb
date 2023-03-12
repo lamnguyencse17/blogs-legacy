@@ -2,28 +2,27 @@ require 'jwt'
 
 class ApplicationController < ActionController::API
   include JsonWebToken
+  include ApplicationHelper
   before_action :authenticate_request
 
   private
+
   def authenticate_request
-    header = request.headers["Authorization"]
-    token = (header.split(" ").last if header) || nil
-    if token.nil?
-        render json: {}, status: 401 and return
-    end
+    token = extract_token
+    render json: {}, status: 401 and return if token.nil?
 
     claim_data = nil
     begin
       claim_data = jwt_decode(token)
     rescue JWT::DecodeError
       render json: {}, status: 401 and return
-    rescue  => error
-      logger.debug "Error: #{error}"
+    rescue StandardError => e
+      logger.debug "Error: #{e}"
       render json: {}, status: 500 and return
     end
     @current_user = User.find(claim_data['id'])
-    if @current_user.nil?
-      render json: {}, status: 401 and return
-    end
+    return unless @current_user.nil?
+
+    render json: {}, status: 401 and return
   end
 end

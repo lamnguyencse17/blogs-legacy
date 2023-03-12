@@ -8,11 +8,11 @@ class Api::V1::UsersController < ApplicationController
     @user.password = params[:password]
     @user.save!
 
-    render json: {user: @user, token: jwt_encode}
+    token, = jwt_encode
+    render json: { user: @user, token: }
   end
 
   private
-
 
   def create_user_params
     params.require(:user).permit(:username, :email, :password)
