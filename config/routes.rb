@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  root 'homepage#index'
+  get '*path', to: 'homepage#index', constraints: lambda { |req| !req.path.starts_with?('/api/') }
   namespace :api do
     namespace :v1 do
       resources :health, only: [:index]
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  root 'homepage#index'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
