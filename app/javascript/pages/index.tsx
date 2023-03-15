@@ -1,5 +1,5 @@
 const HomePage = () => {
-    return <div>
+  return <div>
         Homepage goes here
     </div>
 }
