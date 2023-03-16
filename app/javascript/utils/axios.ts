@@ -1,4 +1,4 @@
-import Axios, { type CreateAxiosDefaults } from 'axios'
+import Axios, { type CreateAxiosDefaults } from 'axios';
 
 const axiosClientConfig: CreateAxiosDefaults<any> = {
   ...Axios.defaults,
@@ -7,15 +7,15 @@ const axiosClientConfig: CreateAxiosDefaults<any> = {
     ...Axios.defaults.headers,
     common: {
       ...Axios.defaults.headers.common,
-      'Content-Type': 'application/json'
-    }
-  }
-}
+      'Content-Type': 'application/json',
+    },
+  },
+};
 
-const axiosClient = Axios.create(axiosClientConfig)
+const axiosClient = Axios.create(axiosClientConfig);
 
 export const addAuthorizationHeader = (value: string) => {
-  axiosClient.defaults.headers.common.Authorization = 'Bearer ' + value
-}
+  axiosClient.defaults.headers.common.Authorization = 'Bearer ' + value;
+};
 
-export default axiosClient
+export default axiosClient;
