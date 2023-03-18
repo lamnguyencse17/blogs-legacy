@@ -13,9 +13,7 @@ class Api::V1::AuthenticateController < ApplicationController
     render json: { code: 'AUTH_01' }, status: 401, content_type: 'application/json' and return if @user.nil?
 
     if @user.password == params[:password]
-      generated_token, expires_in = jwt_encode
-      session = Session.new(user_id: @user.id, token: generated_token, expires_in: Time.at(expires_in))
-      session.save!
+      generated_token, _expires_in = jwt_encode
       render json: { user: @user, token: generated_token }
     else
       render json: {}, status: 401

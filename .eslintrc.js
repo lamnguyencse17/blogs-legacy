@@ -1,42 +1,26 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: ['plugin:react/recommended', 'standard-with-typescript'],
-  overrides: [],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json'],
-    ecmaFeatures: {
-      jsx: true,
+    env: {
+        browser: true,
+        commonjs: true,
+        es2021: true,
     },
-  },
-  plugins: ['react', 'prettier'],
-  rules: {
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
+    extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'prettier',
     ],
-    'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/return-await': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-floating-promises': 'warn',
-    '@typescript-eslint/no-misused-promises': 'off',
-    'prettier/prettier': 'error',
-    'comma-dangle': 'off',
-    '@typescript-eslint/comma-dangle': ['error', 'only-multiline'],
-    '@typescript-eslint/semi': 'off',
-    '@typescript-eslint/member-delimiter-style': 'off',
-  },
-  settings: {
-    react: {
-      version: 'detect',
+    overrides: [],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 'latest',
     },
-  },
+    plugins: ['react', '@typescript-eslint', 'unused-imports'],
+    rules: {
+        indent: ['error', 4],
+        'linebreak-style': ['error', 'unix'],
+        quotes: ['error', 'single'],
+        semi: ['error', 'always'],
+        'react/react-in-jsx-scope': 'off',
+    },
 };

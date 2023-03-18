@@ -14,6 +14,7 @@ const Index = () => {
       alignItems="center"
       padding={4}
       height={16}
+      width="full"
     >
       <Text>
         <Link as={RouterLink} to="/" textDecoration={'none'}>

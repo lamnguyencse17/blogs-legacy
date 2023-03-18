@@ -18,26 +18,26 @@ interface UserState {
 }
 
 const useUserStore = create<UserState>()(
-  devtools((set) => ({
-    setUser: (newUser) => {
-      set(
-        produce((state) => {
-          state.user = newUser;
-        }),
-        false,
-        SET_USER
-      );
-    },
-    resetUser: () => {
-      set(
-        produce((state) => {
-          state.user = undefined;
-        }),
-        false,
-        RESET_USER
-      );
-    },
-  }))
+    devtools((set) => ({
+        setUser: (newUser) => {
+            set(
+                produce((state) => {
+                    state.user = newUser;
+                }),
+                false,
+                SET_USER
+            );
+        },
+        resetUser: () => {
+            set(
+                produce((state) => {
+                    state.user = undefined;
+                }),
+                false,
+                RESET_USER
+            );
+        },
+    }))
 );
 
 export default useUserStore;

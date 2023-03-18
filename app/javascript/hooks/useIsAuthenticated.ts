@@ -18,15 +18,15 @@ type useIsAuthenticatedType = { isAuthenticating: boolean } & (
   | UnauthenticatedType
 );
 const useIsAuthenticated = (): useIsAuthenticatedType => {
-  const user = useUserStore((state) => state.user, shallow);
-  const isAuthenticating =
+    const user = useUserStore((state) => state.user, shallow);
+    const isAuthenticating =
     useIsFetching({
-      queryKey: [CHECK_AUTHENTICATION_QUERY],
+        queryKey: [CHECK_AUTHENTICATION_QUERY],
     }) === 1;
-  if (user !== undefined) {
-    return { isAuthenticating, isAuthenticated: true as const, user };
-  }
-  return { isAuthenticating, isAuthenticated: false as const, user: undefined };
+    if (user !== undefined) {
+        return { isAuthenticating, isAuthenticated: true as const, user };
+    }
+    return { isAuthenticating, isAuthenticated: false as const, user: undefined };
 };
 
 export default useIsAuthenticated;

@@ -2,6 +2,13 @@
   "translation": {
     "errors": {
       "AUTH_01": "Please check again login credentials again"
+    },
+    "navbar_items": {
+      "logout": "Logout",
+      "login": "Login"
+    },
+    "messages": {
+      "handling_request": "We are handling your request"
     }
   }
 }

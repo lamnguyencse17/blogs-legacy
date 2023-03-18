@@ -1,21 +1,27 @@
 import React, { type FunctionComponent } from 'react';
-import { Box, ChakraProvider, Container } from '@chakra-ui/react';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import useAuth from '../hooks/useAuth';
 import { Outlet } from 'react-router-dom';
-import Index from './shared/Navbar';
+import Navbar from './shared/Navbar';
 
 const RootComponent: FunctionComponent = () => {
-  useAuth();
-  return (
-    <ChakraProvider>
-      <Box width="100%" height="100%">
-        <Index />
-        <Container maxW="container.xl" height="full">
-          <Outlet />
-        </Container>
-      </Box>
-    </ChakraProvider>
-  );
+    useAuth();
+    return (
+        <ChakraProvider>
+            <Flex
+                width="100%"
+                height="100%"
+                flexDirection="column"
+                alignItems="center"
+                justifyItems="center"
+            >
+                <Navbar />
+                <Container maxW="container.xl" flex={1}>
+                    <Outlet />
+                </Container>
+            </Flex>
+        </ChakraProvider>
+    );
 };
 
 export default RootComponent;
