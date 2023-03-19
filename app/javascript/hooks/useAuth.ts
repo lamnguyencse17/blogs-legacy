@@ -52,6 +52,9 @@ const useAuth = () => {
         if (location.pathname === '/login' && user !== undefined) {
             navigate('/');
         }
+        if (location.pathname === '/logout' && user === undefined) {
+            navigate('/');
+        }
     }, [location.pathname, user]);
 };
 

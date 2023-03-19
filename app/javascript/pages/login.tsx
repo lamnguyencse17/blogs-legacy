@@ -21,8 +21,11 @@ import { useTranslation } from 'react-i18next';
 import useUserStore, { type UserData } from '../stores/user';
 import { AUTH_TOKEN } from '../constants/localStorage';
 import { addAuthorizationHeader } from '../utils/axios';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LoginPage = () => {
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const setUser = useUserStore((state) => state.setUser);
     const toast = useToast();
     const { t } = useTranslation();
@@ -41,12 +44,15 @@ const LoginPage = () => {
             localStorage.setItem(AUTH_TOKEN, data.token);
             addAuthorizationHeader(data.token);
             setUser(data.user as unknown as UserData);
+
+            const returnUrl = searchParams.get('return');
+            navigate(returnUrl ? returnUrl : '/');
         },
         onError: ({
             response: { data },
         }: {
-      response: { data: { code: string } };
-    }) => {
+            response: { data: { code: string } };
+        }) => {
             toast({
                 title: t(`errors.${data.code}`),
                 status: 'error',
@@ -61,10 +67,15 @@ const LoginPage = () => {
     return (
         <Center>
             <Box w="50%">
-                <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    style={{ width: '100%' }}
+                >
                     <Flex direction="column" alignItems="center">
                         <FormControl
-                            isInvalid={errors.email != null || errors.password != null}
+                            isInvalid={
+                                errors.email != null || errors.password != null
+                            }
                         >
                             <FormLabel htmlFor="email">Email</FormLabel>
                             <Input
@@ -74,7 +85,9 @@ const LoginPage = () => {
                                 type="email"
                                 isInvalid={!(errors.email == null)}
                             />
-                            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+                            <FormErrorMessage>
+                                {errors.email?.message}
+                            </FormErrorMessage>
 
                             <FormLabel htmlFor="password">Password</FormLabel>
                             <Input
@@ -84,7 +97,9 @@ const LoginPage = () => {
                                 type="password"
                                 isInvalid={!(errors.password == null)}
                             />
-                            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+                            <FormErrorMessage>
+                                {errors.password?.message}
+                            </FormErrorMessage>
                         </FormControl>
                         <Button
                             mt={4}
@@ -92,7 +107,7 @@ const LoginPage = () => {
                             isLoading={isSubmitting}
                             type="submit"
                         >
-              Submit
+                            Submit
                         </Button>
                     </Flex>
                 </form>

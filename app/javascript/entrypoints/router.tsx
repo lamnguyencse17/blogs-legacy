@@ -4,8 +4,9 @@ import { lazy, Suspense } from 'react';
 import RootComponent from '../components/Root';
 import LoginPage from '../pages/login';
 import LogoutPage from '../pages/logout';
+import LoadingFallback from '../components/LoadingFallback';
 
-const EditorPage = lazy(async () => await import('../pages/index'));
+const EditorPage = lazy(async () => await import('../pages/editor'));
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
             {
                 path: '/editor',
                 element: (
-                    <Suspense fallback={'loading'}>
+                    <Suspense fallback={<LoadingFallback />}>
                         <EditorPage />
                     </Suspense>
                 ),
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: (
-                    <Suspense fallback={'loading'}>
+                    <Suspense fallback={<LoadingFallback />}>
                         <LoginPage />
                     </Suspense>
                 ),
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/logout',
                 element: (
-                    <Suspense fallback={'loading'}>
+                    <Suspense fallback={<LoadingFallback />}>
                         <LogoutPage />
                     </Suspense>
                 ),
