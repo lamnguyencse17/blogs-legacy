@@ -10,14 +10,27 @@ import {
 } from '@chakra-ui/react';
 import ProtectedPage from '../components/ProtectedPage';
 import { useTranslation } from 'react-i18next';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PreviewBody from '../components/editor/PreviewBody';
+import { throttle } from 'lodash-es';
+import { AUTOSAVE_CONTENT } from '../constants/localStorage';
+
+const throttledStoreContent = throttle((content: string) => {
+    localStorage.setItem(AUTOSAVE_CONTENT, content);
+}, 2000);
 
 const PREVIEW_TAB_INDEX = 1;
 const EditorPage = () => {
     const { t } = useTranslation();
     const [markdown, setMarkdown] = useState('');
     const bodyEditorRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        const autosaveContent = localStorage.getItem(AUTOSAVE_CONTENT);
+        if (bodyEditorRef.current) {
+            bodyEditorRef.current.value = autosaveContent || '';
+        }
+    }, []);
 
     return (
         <ProtectedPage>
@@ -56,6 +69,9 @@ const EditorPage = () => {
                                 }
                                 ref={bodyEditorRef}
                                 height={'30rem'}
+                                onChange={(e) => {
+                                    throttledStoreContent(e.target.value);
+                                }}
                             />
                         </TabPanel>
                         <TabPanel>
