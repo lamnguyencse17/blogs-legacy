@@ -1,23 +1,24 @@
 {
-  "translation": {
-    "errors": {
-      "AUTH_01": "Please check again login credentials again"
-    },
-    "navbar_items": {
-      "create_new_article": "Create an article",
-      "logout": "Logout",
-      "login": "Login"
-    },
-    "messages": {
-      "handling_request": "We are handling your request"
-    },
-    "pages": {
-      "editor": {
-        "article_title_placeholder": "Your article title goes here",
-        "article_body_placeholder": "Your Markdown article goes here",
-        "write": "Write",
-        "preview": "Preview"
-      }
+    "translation": {
+        "errors": {
+            "AUTH_01": "Please check again login credentials again"
+        },
+        "navbar_items": {
+            "create_new_article": "Create an article",
+            "logout": "Logout",
+            "login": "Login"
+        },
+        "messages": {
+            "handling_request": "We are handling your request"
+        },
+        "pages": {
+            "editor": {
+                "article_title_placeholder": "Your article title goes here",
+                "article_body_placeholder": "Your Markdown article goes here",
+                "write": "Write",
+                "preview": "Preview",
+                "submit": "Submit"
+            }
+        }
     }
-  }
 }

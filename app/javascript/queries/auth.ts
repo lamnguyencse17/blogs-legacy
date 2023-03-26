@@ -11,16 +11,16 @@ export const loginSchema = z.object({
 });
 
 export type LoginFormData = z.infer<typeof loginSchema>;
-export interface LoginSuccessData {
-  user: {
-    id: number;
-    username: string;
-    email: string;
-    created_at: string;
-    updated_at: string;
-  };
-  token: string;
-}
+export type LoginSuccessData = {
+    user: {
+        id: number;
+        username: string;
+        email: string;
+        created_at: string;
+        updated_at: string;
+    };
+    token: string;
+};
 
 export const authenticateUserQuery = async (values: LoginFormData) =>
     axiosClient.post<LoginFormData, AxiosResponse<LoginSuccessData>>(

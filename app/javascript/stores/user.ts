@@ -5,17 +5,17 @@ import produce from 'immer';
 const SET_USER = 'SET_USER';
 const RESET_USER = 'RESET_USER';
 
-export interface UserData {
-  id: number;
-  username: string;
-  email: string;
-}
+export type UserData = {
+    id: number;
+    username: string;
+    email: string;
+};
 
-interface UserState {
-  user?: UserData;
-  setUser: (newUser: UserData) => void;
-  resetUser: () => void;
-}
+type UserState = {
+    user?: UserData;
+    setUser: (newUser: UserData) => void;
+    resetUser: () => void;
+};
 
 const useUserStore = create<UserState>()(
     devtools((set) => ({
