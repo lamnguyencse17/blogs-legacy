@@ -15,7 +15,7 @@ import {
 import ProtectedPage from '../components/ProtectedPage';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import PreviewBody from '../components/editor/PreviewBody';
+import MarkdownPresenter from '../components/shared/MarkdownPresenter';
 import { isNil, throttle } from 'lodash-es';
 import { AUTOSAVE_CONTENT } from '../constants/localStorage';
 import {
@@ -156,7 +156,9 @@ const EditorPage = () => {
                                         </FormErrorMessage>
                                     </TabPanel>
                                     <TabPanel>
-                                        <PreviewBody markdown={markdown} />
+                                        <MarkdownPresenter
+                                            markdown={markdown}
+                                        />
                                     </TabPanel>
                                 </TabPanels>
                             </Tabs>

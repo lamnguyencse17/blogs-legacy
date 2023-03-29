@@ -1,11 +1,10 @@
 import { useLoaderData } from 'react-router-dom';
-import { CREATE_ARTICLE_MUTATION } from '../../constants/query';
-import queryClient from '../../utils/query';
+import MarkdownPresenter from '../../components/shared/MarkdownPresenter';
+import { ArticleData } from '../../queries/article';
 
 const ArticlePage = () => {
-    const { article } = useLoaderData();
-    console.log(article);
-    return <>Article</>;
+    const { article } = useLoaderData() as { article: ArticleData };
+    return <MarkdownPresenter markdown={article.body} />;
 };
 
 export default ArticlePage;
