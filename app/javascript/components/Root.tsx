@@ -1,4 +1,4 @@
-import React, { type FunctionComponent } from 'react';
+import { type FunctionComponent } from 'react';
 import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 import useAuth from '../hooks/useAuth';
 import { Outlet } from 'react-router-dom';

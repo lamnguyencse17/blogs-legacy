@@ -5,7 +5,7 @@ class Api::V1::AuthenticateController < ApplicationController
   skip_before_action :authenticate_request, only: [:login]
 
   def index
-    render json: {user: @current_user, token: @token}
+    render json: { user: @current_user, token: @token }
   end
 
   def login

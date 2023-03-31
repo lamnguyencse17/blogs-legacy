@@ -1,7 +1,8 @@
 import { AxiosError } from 'axios';
 import { isNaN, isNil } from 'lodash-es';
 import { LoaderFunction } from 'react-router-dom';
-import { getArticleQuery } from '../queries/article';
+import { INITIAL_PAGE, INITIAL_PAGE_SIZE } from '../constants/queryString';
+import { getArticleListQuery, getArticleQuery } from '../queries/article';
 import useArticleStore from '../stores/article';
 import queryClient from '../utils/query';
 
@@ -26,4 +27,14 @@ export const getArticleLoader: LoaderFunction = async ({ params }) => {
         console.log((error as AxiosError).response?.status);
         throw new Response('Article not found', { status: 404 });
     }
+};
+
+export const getArticleListLoader: LoaderFunction = async () => {
+    const articleListResponse = await queryClient.fetchQuery({
+        queryKey: ['articles', INITIAL_PAGE, INITIAL_PAGE_SIZE],
+        queryFn: () => getArticleListQuery(INITIAL_PAGE, INITIAL_PAGE_SIZE),
+    });
+
+    const fetchedArticles = articleListResponse.data;
+    return { articles: fetchedArticles };
 };

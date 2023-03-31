@@ -27,3 +27,8 @@ export const getArticleQuery = async (articleId: number) =>
     axiosClient.get<number, AxiosResponse<ArticleData>>(
         `articles/${articleId}`
     );
+
+export const getArticleListQuery = async (page: number, pageSize: number) =>
+    axiosClient.get<number, AxiosResponse<ArticleData[]>>(
+        `articles?page=${page}&size=${pageSize}`
+    );

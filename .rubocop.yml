@@ -1,17 +1,18 @@
 AllCops:
-  Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'bin/**/*'
+    Exclude:
+        - 'db/**/*'
+        - 'config/**/*'
+        - 'bin/**/*'
+        - 'vendor/**/*'
 Style/ClassAndModuleChildren:
-  Enabled: false
+    Enabled: false
 Style/FrozenStringLiteralComment:
-  Enabled: false
+    Enabled: false
 Style/Documentation:
-  Enabled: false
+    Enabled: false
 Style/EndOfLine:
-  EnforcedStyle: lf
+    EnforcedStyle: lf
 Metrics/MethodLength:
-  Max: 20
+    Max: 20
 Metrics/CyclomaticComplexity:
-  Max: 10
+    Max: 10

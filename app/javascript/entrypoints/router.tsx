@@ -6,7 +6,10 @@ import LoginPage from '../pages/login';
 import LogoutPage from '../pages/logout';
 import LoadingFallback from '../components/LoadingFallback';
 import ArticlePage from '../pages/article';
-import { getArticleLoader } from '../loaders/articleLoaders';
+import {
+    getArticleListLoader,
+    getArticleLoader,
+} from '../loaders/articleLoaders';
 import ErrorBoundary from '../components/shared/ErrorBoundary';
 
 const EditorPage = lazy(async () => await import('../pages/editor'));
@@ -18,6 +21,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />,
+                loader: getArticleListLoader,
             },
             {
                 path: '/editor',

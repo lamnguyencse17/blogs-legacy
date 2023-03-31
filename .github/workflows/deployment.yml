@@ -1,3 +1,4 @@
+name: Deployment
 on:
     push:
         branches:
@@ -8,7 +9,11 @@ env:
     REGISTRY: ghcr.io
 
 jobs:
+    lint:
+        uses: ./.github/workflows/lint.yml
+
     migrate:
+        needs: lint
         runs-on: ubuntu-latest
         env:
             DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -41,6 +46,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 18
+            - run: npm ci
             - name: Precompile assets
               run: bundle exec rake assets:precompile
             - name: Clean assets
