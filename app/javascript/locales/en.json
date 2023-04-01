@@ -18,6 +18,10 @@
                 "write": "Write",
                 "preview": "Preview",
                 "submit": "Submit"
+            },
+            "index": {
+                "reading_time_one": "{{count}} min read",
+                "reading_time_other": "{{count}} mins read"
             }
         }
     }

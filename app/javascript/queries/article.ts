@@ -28,7 +28,11 @@ export const getArticleQuery = async (articleId: number) =>
         `articles/${articleId}`
     );
 
+export type ArticleDataWithCreator = ArticleData & {
+    creator_username: string;
+};
+
 export const getArticleListQuery = async (page: number, pageSize: number) =>
-    axiosClient.get<number, AxiosResponse<ArticleData[]>>(
+    axiosClient.get<number, AxiosResponse<ArticleDataWithCreator[]>>(
         `articles?page=${page}&size=${pageSize}`
     );
