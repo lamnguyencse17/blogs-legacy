@@ -4,7 +4,7 @@ import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
 import NavbarUnauthenticatedActions from './NavbarUnauthenticatedActions';
 import NavbarAuthenticatedActions from './NavbarAuthenticatedActions';
 
-const Index = () => {
+const Navbar = () => {
     const { isAuthenticating, isAuthenticated, user } = useIsAuthenticated();
 
     return (
@@ -34,4 +34,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Navbar;

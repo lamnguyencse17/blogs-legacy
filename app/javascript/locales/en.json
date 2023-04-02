@@ -21,7 +21,9 @@
             },
             "index": {
                 "reading_time_one": "{{count}} min read",
-                "reading_time_other": "{{count}} mins read"
+                "reading_time_other": "{{count}} mins read",
+                "load_more": "Load more",
+                "no_more_articles": "No more content for now :<"
             }
         }
     }
