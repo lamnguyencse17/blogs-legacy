@@ -29,10 +29,13 @@ export const getArticleLoader: LoaderFunction = async ({ params }) => {
     }
 };
 
+const FIVE_MINUTES = 1000 * 60 * 5;
+
 export const getArticleListLoader: LoaderFunction = async () => {
     const articleListResponse = await queryClient.fetchQuery({
         queryKey: ['articles', INITIAL_PAGE, INITIAL_PAGE_SIZE],
         queryFn: () => getArticleListQuery(INITIAL_PAGE, INITIAL_PAGE_SIZE),
+        staleTime: FIVE_MINUTES,
     });
 
     const fetchedArticles = articleListResponse.data;

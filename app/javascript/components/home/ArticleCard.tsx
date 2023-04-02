@@ -6,6 +6,7 @@ import useArticleStore from '../../stores/article';
 import { shallow } from 'zustand/shallow';
 import calculateReadingTime from '../../utils/readingTime';
 import { useTranslation } from 'react-i18next';
+import { isNil } from 'lodash-es';
 
 type ArticleCardProps = {
     article: ArticleDataWithCreator;
@@ -17,6 +18,7 @@ const InnerArticleCard: FunctionComponent<ArticleCardProps> = ({ article }) => {
     const setArticleOnHover = useCallback(() => {
         setArticle(article);
     }, []);
+
     return (
         <Flex
             flexDirection="column"
@@ -45,6 +47,7 @@ const InnerArticleCard: FunctionComponent<ArticleCardProps> = ({ article }) => {
 };
 
 const ArticleCard = (_: number, article: ArticleDataWithCreator) => {
+    if (isNil(article)) return null;
     return <InnerArticleCard article={article} />;
 };
 

@@ -4,7 +4,7 @@ import {
     ArticleDataWithCreator,
     getArticleListQuery,
 } from '../queries/article';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { useQuery } from '@tanstack/react-query';
 import { INITIAL_PAGE, INITIAL_PAGE_SIZE } from '../constants/queryString';
@@ -13,13 +13,14 @@ import LoadMore from '../components/home/LoadMore';
 import ArticleCard from '../components/home/ArticleCard';
 
 const FIVE_MINUTES = 5 * 60 * 1000;
+const OVERSCAN_VALUE = 200;
 
 const HomePage = () => {
-    const { articles } = useLoaderData() as {
+    const { articles: initialArticles } = useLoaderData() as {
         articles: ArticleDataWithCreator[];
     };
     const [articleList, setArticleList] =
-        useState<ArticleDataWithCreator[]>(articles);
+        useState<ArticleDataWithCreator[]>(initialArticles);
 
     const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
     const [pageSize, _] = useState(INITIAL_PAGE_SIZE);
@@ -43,6 +44,12 @@ const HomePage = () => {
         setCurrentPage((prevPage) => prevPage + 1);
     }, []);
 
+    useEffect(() => {
+        if (initialArticles.length < INITIAL_PAGE_SIZE) {
+            setEndOfList(true);
+        }
+    }, []);
+
     return (
         <Container maxW={['100%', 'container.sm', 'container.md']}>
             <Flex
@@ -61,8 +68,7 @@ const HomePage = () => {
                     }}
                     data={articleList}
                     style={{ height: 300, width: '100%' }}
-                    overscan={200}
-                    initialItemCount={10}
+                    overscan={OVERSCAN_VALUE}
                     useWindowScroll
                     itemContent={ArticleCard}
                     components={{ Footer: LoadMore }}
