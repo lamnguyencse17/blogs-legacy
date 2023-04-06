@@ -1,0 +1,3 @@
+generate_article_job:
+    cron: '*/1 * * * *'
+    class: 'GenerateArticleJob'
