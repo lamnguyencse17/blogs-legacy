@@ -22,7 +22,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
             - name: Install Ruby dependencies
-              uses: ruby/setup-ruby@v1
+              uses: ruby/setup-ruby@v1.146.0
               with:
                   bundler-cache: true
             - name: Migrate databases
@@ -39,7 +39,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
             - name: Install Ruby dependencies
-              uses: ruby/setup-ruby@v1
+              uses: ruby/setup-ruby@v1.146.0
               with:
                   bundler-cache: true
             - name: Install Node dependencies
