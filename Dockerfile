@@ -1,4 +1,4 @@
-FROM ruby:3.2.1
+FROM ruby:3.2.2
 EXPOSE 80
 ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=dummy
