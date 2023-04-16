@@ -1,0 +1,18 @@
+FROM ruby:3.2.2
+EXPOSE 80
+ENV RAILS_ENV=production
+ENV SECRET_KEY_BASE=dummy
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN bundle config --global frozen 1
+
+WORKDIR /usr/src/app
+
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle install
+
+COPY . .
+
+CMD ["bundle", "exec", "sidekiq", "-e", "production"]
+

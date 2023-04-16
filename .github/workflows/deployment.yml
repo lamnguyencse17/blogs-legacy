@@ -52,6 +52,35 @@ jobs:
             - name: Clean assets
               run: bundle exec rake assets:clean
 
+    build-sidekiq:
+        runs-on: ARM64
+        permissions:
+            contents: read
+            packages: write
+        needs: pre-deploy
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v2
+            - name: Log in to the Container registry
+              uses: docker/login-action@v2.1.0
+            - name: Extract metadata (tags, labels) for Docker
+              id: meta
+              uses: docker/metadata-action@v4.3.0
+              with:
+                  images: ${{ env.REGISTRY }}/blogs_sidekiq
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v4
+              with:
+                  context: .
+                  push: true
+                  tags: '${{ env.REGISTRY }}/${{ inputs.image_name }}:${{ inputs.tag }}'
+                  labels: ${{ steps.meta.outputs.labels }}
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+                  file: '{{context}}/Dockerfile.sidekiq'
+
     build-docker-arm64:
         permissions:
             contents: read

@@ -47,7 +47,7 @@ module External
         model: @model,
         messages: [{
           role: @role,
-          content: 'Generate an at least 3 minute programming article with one of the topics: Node.js, React, Javascript.
+          content: 'Generate an at least 3 minute programming article with one of the topics: Node.js, React, Javascript
 The level required to read this should be at least junior developer. The article should not be at introductory level.
 The article should include code snippets and example and written in github markdown source code.'
         }]
