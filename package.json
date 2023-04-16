@@ -22,7 +22,8 @@
     },
     "scripts": {
         "dev": "bundle exec vite dev",
-        "lint": "eslint --ignore-path .eslintignore app/javascript/**/*.{ts,tsx}"
+        "lint": "eslint --ignore-path .eslintignore app/javascript/**/*.{ts,tsx}",
+        "build": "NODE_ENV=production bundle exec vite build"
     },
     "dependencies": {
         "@chakra-ui/icons": "^2.0.17",

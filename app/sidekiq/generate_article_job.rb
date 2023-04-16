@@ -4,7 +4,7 @@ class GenerateArticleJob
   include Sidekiq::Job
 
   def perform(*_args)
-    open_ai_service = OpenAIService.new(ENV['OPENAI_KEY'], ENV['OPENAI_ORG'])
+    open_ai_service = OpenAiService.new(ENV['OPENAI_KEY'], ENV['OPENAI_ORG'])
     stop_reason, content = open_ai_service.create_article
     return unless stop_reason == 'stop' || content.nil?
 
