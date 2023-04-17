@@ -13,8 +13,14 @@ class GenerateArticleJob
     open_ai_user = User.find_by_username('OpenAI')
     Article.create(
       user_id: open_ai_user.id,
-      body: content,
+      body: fix_bad_header(content),
       title: title_match[0].strip || 'Pending title'
     )
+  end
+
+  private
+
+  def fix_bad_header(text)
+    text.gsub(/(#+)(\w)/, '\1 \2')
   end
 end
