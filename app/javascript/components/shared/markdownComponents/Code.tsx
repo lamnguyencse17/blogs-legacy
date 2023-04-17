@@ -1,9 +1,13 @@
 import { isNil, unescape } from 'lodash-es';
 import { FunctionComponent } from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
 import { CodeProps } from 'react-markdown/lib/ast-to-react';
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+const decodeUnicodeHex = (originalCode: string) =>
+    originalCode.replace(/&#x([a-f\d]+);/gi, (_, hex) =>
+        String.fromCharCode(parseInt(hex, 16))
+    );
 
 const parseLanguage = (className?: string) => {
     if (isNil(className)) {
@@ -19,7 +23,6 @@ const Code: FunctionComponent<CodeProps> = ({
     inline,
 }) => {
     const language = parseLanguage(className);
-    console.log(renderToStaticMarkup(<>{children}</>));
     return (
         <SyntaxHighlighter
             language={language}
@@ -29,7 +32,7 @@ const Code: FunctionComponent<CodeProps> = ({
                 padding: '0.2em',
             }}
         >
-            {unescape(renderToStaticMarkup(<>{children}</>))}
+            {decodeUnicodeHex(unescape(children.toString()))}
         </SyntaxHighlighter>
     );
 };
