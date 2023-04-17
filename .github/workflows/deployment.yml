@@ -83,7 +83,7 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
-                  file: '{{context}}/Dockerfile.sidekiq'
+                  file: '${{github.workspace}}/Dockerfile.sidekiq'
 
     build-docker-arm64:
         permissions:
