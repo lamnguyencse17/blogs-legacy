@@ -5,4 +5,7 @@ import dynamicImport from 'vite-plugin-dynamic-import';
 
 export default defineConfig({
     plugins: [dynamicImport(), react(), RubyPlugin()],
+    build: {
+        target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    },
 });
