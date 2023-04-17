@@ -1,4 +1,4 @@
-import { isNil } from 'lodash-es';
+import { isNil, unescape } from 'lodash-es';
 import { FunctionComponent } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CodeProps } from 'react-markdown/lib/ast-to-react';
@@ -19,7 +19,7 @@ const Code: FunctionComponent<CodeProps> = ({
     inline,
 }) => {
     const language = parseLanguage(className);
-
+    console.log(renderToStaticMarkup(<>{children}</>));
     return (
         <SyntaxHighlighter
             language={language}
@@ -29,7 +29,7 @@ const Code: FunctionComponent<CodeProps> = ({
                 padding: '0.2em',
             }}
         >
-            {renderToStaticMarkup(<>{children}</>)}
+            {unescape(renderToStaticMarkup(<>{children}</>))}
         </SyntaxHighlighter>
     );
 };
